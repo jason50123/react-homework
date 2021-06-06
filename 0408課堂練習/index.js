@@ -12,6 +12,12 @@ const comment = {
     },
 };
 
-ReactDOM.render(<App/>,document.getElementById('root'));
+ReactDOM.render(
+    <App
+        date = {comment.date}
+        text = {comment.text}
+        author = {comment.author}
+    />,
+document.getElementById('root'));
 
 
