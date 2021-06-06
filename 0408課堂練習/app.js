@@ -21,7 +21,7 @@ function UserInfo(props) {
     );
 }
 
-function Comment(props) {
+function App(props) {
     return (
     <div className="Comment">
         <UserInfo user={props.author} />
@@ -33,19 +33,4 @@ function Comment(props) {
     );
 }
 
-const comment = {
-    date: new Date(),
-    text: 'I hope you enjoy learning React!',
-    author: {
-        name: 'Hello Kitty',
-        avatarUrl: 'https://placekitten.com/g/64/64',
-    },
-};
-ReactDOM.render(
-    <Comment
-        date={comment.date}
-        text={comment.text}
-        author={comment.author}
-    />,
-    document.getElementById('root')
-);
+
