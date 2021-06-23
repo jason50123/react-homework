@@ -1,38 +1,62 @@
 import React from "react";
 
-class App extends React.Component {
+function UserGreeting(props) {
+    return <h1>Welcome back!</h1>;
+}
+
+function GuestGreeting(props) {
+    return <h1>Please sign up.</h1>;
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <UserGreeting />;
+    }
+    return <GuestGreeting />;
+}
+
+function LoginButton(props) {
+    return <button onClick={props.onClick}>Login</button>;
+}
+
+function LogoutButton(props) {
+    return <button onClick={props.onClick}>Logout</button>;
+}
+
+class LoginControl extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data: "初始資料，來自父元件 this.state",
-        };
-        //this.updateState = this.updateState.bind(this);
+        //this.handleLoginClick = this.handleLoginClick.bind(this);
+        //this.handleLogoutClick = this.handleLogoutClick.bind(this);
+        this.state = { isLoggedIn: false };
     }
-    updateState = () => {
-        this.setState({ data: "子元件使用父元件 event 改變父元件 state" });
+
+    handleLoginClick = () => {
+        this.setState({ isLoggedIn: true });
     };
+
+    handleLogoutClick = () => {
+        this.setState({ isLoggedIn: false });
+    };
+
     render() {
+        const isLoggedIn = this.state.isLoggedIn;
+        let button;
+        if (isLoggedIn) {
+            button = <LogoutButton onClick={this.handleLogoutClick} />;
+        } else {
+            button = <LoginButton onClick={this.handleLoginClick} />;
+        }
+
         return (
             <div>
-                <Content
-                    updateStateProp={this.updateState}
-                    myDataProp={this.state.data}
-                ></Content>
+                <Greeting isLoggedIn={isLoggedIn} />
+                {button}
             </div>
         );
     }
 }
 
-class Content extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick={this.props.updateStateProp}>
-                    我是Content子元件的按鈕
-                </button>
-                <h3>{this.props.myDataProp}</h3>
-            </div>
-        );
-    }
-}
-export default App;
+export default LoginControl;
+    
